@@ -15,9 +15,11 @@ int main(void) {
 	rand(); // I saw someone on stack overflow say you need to add a rand(); prior to your first call, otherwise it continues to be psuedo-random
 			// https://stackoverflow.com/a/16569927
 	
-	while (gameOver == false) {
+	while (gameOver == false) { // I'm pretty sure this while loop is redundant WILL CHANGE
 		
 		int userArea = 0;
+		int userChapter = 0; // Designates the chapter of the game the user is in
+		
 		char userName[20];
 		char userOccupation[20];
 		int userChoice = 0;
@@ -112,6 +114,7 @@ int main(void) {
 			if (userArea == 1) {
 				printf("Entering the castle gate...\n");
 				// CODE GOES HERE	
+				gameOver = true;
 				break;
 			}
 		
@@ -230,3 +233,4 @@ int main(void) {
 	
 	return 0;
 }
+
