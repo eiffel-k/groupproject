@@ -8,10 +8,11 @@
 
 int GetUserInput(int optionsMin, int optionsLimit);
 
-void AsteriskWall();
+void AsteriskWall(int newBefore, int numAsterisks, int newAfter);
 
 
 int main(void) {
+	int i = 0;
 	int optionsLimit = 0;
 	int optionsMin = 1;
 	int tempVal = 0;
@@ -227,14 +228,14 @@ int main(void) {
 	// OPTION 3 leave main gate
 		if (userArea == 3) {
 			
-			AsteriskWall();
+			AsteriskWall(1, 10, 1);
 			printf("As you look around you, you see an unkempt thicket.\n");
 			if (oldManQuest == 2) {
 				printf("An old man plays happily with his goat, and you can hear the guards letting people in behind you.");
 			} else {
 				printf("An old man paces worriedly near his pack mule, and you can hear the guards letting people in behind you.");
 			}
-			AsteriskWall();
+			AsteriskWall(1, 10, 1);
 			
 			if (oldManQuest == 1) {
 				optionsLimit = 4;
@@ -256,16 +257,15 @@ int main(void) {
 			tempVal = GetUserInput(1, optionsLimit);
 			
 			if (tempVal == 1) {
-				AsteriskWall();
+				AsteriskWall(1, 10, 1);
 				printf("You give up on your search for now and return to the main gate.");
-				AsteriskWall();
-				printf("\n");
+				AsteriskWall(1, 10, 1);
 				userArea = 0;
 				continue;
 			} else if (tempVal == 2) {
-				AsteriskWall();
+				AsteriskWall(1, 10, 1);
 				printf("You search the bushes near the castle and discover a hole in the castle wall.");
-				AsteriskWall();
+				AsteriskWall(1, 10, 1);
 				printf("\nDo you want to enter the castle?\n");
 				printf("1) Yes.\n");
 				printf("2) No.\n");
@@ -312,23 +312,23 @@ int main(void) {
 				}
 			} else if (tempVal == 4 && oldManQuest == 1 && hasGoat == 0) {
 				tempVal = 0;
-				AsteriskWall();
+				AsteriskWall(1, 10, 1);
 				printf("As you walk deeper into the woods you grow closer to a clearing.\n");
 				printf("Your ears are filled with the sounds of the forest, and the bleating of a goat.");
-				AsteriskWall();
+				AsteriskWall(1, 10, 1);
 				while (tempVal != 2) {
 					printf("\n1) Call out to the goat to come closer\n");
 					printf("2) Sneak up on the goat\n");
 					tempVal = GetUserInput(1, 2);
 					if (tempVal == 1) {
-						AsteriskWall();
+						AsteriskWall(1, 10, 1);
 						printf("You call out to the goat, but it doesn't seem to hear you.");
-						AsteriskWall();
+						AsteriskWall(1, 10, 1);
 					} else if (tempVal == 2) {
-						AsteriskWall();
+						AsteriskWall(1, 10, 1);
 						printf("You creep up on the goat, your armor making a racket the whole way. It's a miracle the goat didn't hear you.\n");
 						printf("With the goat still screaming in your arms, you make your way back the way you came.");
-						AsteriskWall();
+						AsteriskWall(1, 10, 1);
 						hasGoat = 1;
 						userArea = 3;
 						continue;
@@ -362,8 +362,19 @@ int GetUserInput(int optionsMin, int optionsLimit) { // Function for getting use
 	return userIn;
 }
 
-void AsteriskWall() {
-	printf("\n**********\n");
+void AsteriskWall(int newBefore, int numAsterisks, int newAfter) { // newBefore = number of newlines before asterisks | numAsterisks = number of asterisks | newAfter = number of newlines after asterisks
+	for (i = 0; i < newBefore; i++) {
+		printf("\n");
+	}
+	
+	for (i = 0; i < numAsterisks; i++) {
+		printf("*");
+	}
+
+	for (i = 0; i < newAfter; i++) {
+		printf("\n");
+	}
 }
+
 
 
