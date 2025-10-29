@@ -6,7 +6,9 @@
 #include <time.h>
 
 
+int GetUserInput(int optionsMin, int optionsLimit);
 
+void AsteriskWall();
 
 
 int main(void) {
@@ -360,7 +362,8 @@ int GetUserInput(int optionsMin, int optionsLimit) { // Function for getting use
 	return userIn;
 }
 
-AsteriskWall() {
+void AsteriskWall() {
 	printf("\n**********\n");
 }
+
 
