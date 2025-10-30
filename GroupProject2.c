@@ -5,11 +5,14 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+
 typedef struct {
 	char name[20];
 	char occupation[20];
 	int gold;
 } UserInfo;
+
 
 
 int GetUserInput(int optionsMin, int optionsLimit);
@@ -33,9 +36,7 @@ int main(void) {
 	int userArea = 0;
 	int userChapter = 0; // Designates the chapter of the game the user is in
 	
-	int userIntroComplete = 0;
 	int userChoice = 0;
-	int userLocation = 0;
 	
 	int yesOrNo = 0; // 1 for yes, 2 for no, 0 for default 
 	int loopControl = 0; // for prison area loop control 
@@ -48,7 +49,6 @@ int main(void) {
 	
 
 
-	
 	// Set the scene for the story
 	printf("**********\n");
 	printf("You trudge along the path beneath you, your armor weighing down your tired body.\n");
@@ -58,7 +58,6 @@ int main(void) {
 	printf("**********\n\n");
 
 	UserInfo user = UserIntro(); // Calls the intro function and sets user.name user.occupation and user.gold
-
 	user.gold = 0;
 
 	
@@ -66,37 +65,6 @@ int main(void) {
 	// userArea represents where in the story the player currently is. 0 for main gate, 1 for inside the gate, 2 for jail, 3 for secret entrance etc...
 	do {	
 		if (userArea == 0) {
-
-			/* FIXME remove redundant intro (replaced by UserIntro())
-			if (userIntroComplete == 1) {
-				printf("Gate Guard: \"Stop right there!\"\n"); 
-				
-				while ( userChoice != 1 ) {
-					userChoice = 0;
-					printf("Gate Guard: \"Please state your name and occupation.\"\n\n");
-				
-					printf("Name (no spaces) > ");
-					
-				
-				
-					printf("Occupation (no spaces) > ");
-					
-				
-				
-					
-					printf("1) Yes.\n");
-					printf("2) No.\n");
-					
-					while ( userChoice != 1 && userChoice != 2 ) {
-						printf("> ");
-						scanf("%d", &userChoice);
-					}
-					printf("\n");
-				}
-
-				userIntroComplete = 1;
-			}
-			*/
 			
 			userChoice = 0;
 			
@@ -428,6 +396,7 @@ UserInfo UserIntro() {
 	return info;
 
 }
+
 
 
 
