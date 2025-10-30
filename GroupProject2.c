@@ -57,7 +57,7 @@ int main(void) {
 	printf("As you approach the gate, a guard stops you.\n");
 	printf("**********\n\n");
 
-	UserInfo user = UserIntro();
+	UserInfo user = UserIntro(); // Calls the intro function and sets user.name user.occupation and user.gold
 
 	user.gold = 0;
 
@@ -66,7 +66,8 @@ int main(void) {
 	// userArea represents where in the story the player currently is. 0 for main gate, 1 for inside the gate, 2 for jail, 3 for secret entrance etc...
 	do {	
 		if (userArea == 0) {
-			
+
+			/* FIXME remove redundant intro (replaced by UserIntro())
 			if (userIntroComplete == 1) {
 				printf("Gate Guard: \"Stop right there!\"\n"); 
 				
@@ -95,6 +96,7 @@ int main(void) {
 
 				userIntroComplete = 1;
 			}
+			*/
 			
 			userChoice = 0;
 			
@@ -426,6 +428,7 @@ UserInfo UserIntro() {
 	return info;
 
 }
+
 
 
 
