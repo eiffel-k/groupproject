@@ -50,12 +50,12 @@ int main(void) {
 
 
 	// Set the scene for the story
-	printf("**********\n");
+	AsteriskWall(0, 10, 1);
 	printf("You trudge along the path beneath you, your armor weighing down your tired body.\n");
 	printf("As you slow to a stop, you see your target in front of you.\n");
 	printf("A towering castle emerges from the thicket of trees, and you see the main gate in the distance.\n");
-	printf("As you approach the gate, a guard stops you.\n");
-	printf("**********\n\n");
+	printf("As you approach the gate, a guard stops you.");
+	AsteriskWall(1, 10, 2);
 
 	UserInfo user = UserIntro(); // Calls the intro function and sets user.name user.occupation and user.gold
 	user.gold = 0;
@@ -82,20 +82,20 @@ int main(void) {
 				if (user.gold < 50 && userChoice == 1) {
 					printf("Not enough gold\n");
 					userChoice = 0;
-				} else if (user.gold >= 50 && userChoice == 1) {
+				} else if (user.gold >= 50 && userChoice == 1) { //go to inside gate
 					printf("\nGate Guard: \"Welcome to the castle %s!\"\n", user.name);
 					user.gold -= 50;
 					userArea = 1;
 					continue;
-					//go to inside gate;
-				} else if (userChoice == 2) {
-					printf("\n**********\n");
-					printf("You try to fight your way past the guard, but your tired body fails you.\nMore guards rush to the gate, and you are swiftly taken to prison.\n");
-					printf("**********\n\n");
+					
+				} else if (userChoice == 2) { // go to prison area
+					AsteriskWall(1, 10, 1);
+					printf("You try to fight your way past the guard, but your tired body fails you.\nMore guards rush to the gate, and you are swiftly taken to prison.");
+					AsteriskWall(1, 10, 2);
 					userArea = 2;
 					continue;
-					// go to prison area;
-				} else if (userChoice == 3) {
+					
+				} else if (userChoice == 3) { // go to outside gate
 					AsteriskWall(1, 10, 1);
 					printf("As you look around you, you see an unkempt thicket.\n");
 					if (oldManQuest == 2) {
@@ -123,11 +123,11 @@ int main(void) {
 	// OPTION 2 prison area
 		if (userArea == 2) {
 			printf("Entering prison...\n");
-			printf("\n**********\n");
+			AsteriskWall(1, 10, 1);
 			printf("You awaken in a cold, damp cell, surrounded by stone walls and the steady echo of dripping water.\n");
 			printf("In the shadowed corner, a prisoner watches you. \nHis eyes burn with intensity, and a wavering grin stretches across his face.\n");
-			printf("He whispers from the corner, only loud enough for you to hear. \nPrisoner: \"There's a way out, but it will cost you.\"\n");
-			printf("**********\n\n");
+			printf("He whispers from the corner, only loud enough for you to hear. \nPrisoner: \"There's a way out, but it will cost you.\"");
+			AsteriskWall(1, 10, 2);
 			
 			printf("1) Pay the prisoner 25 gold to escape. (%d gold owned.)\n", user.gold);
 			printf("2) Try to pick the lock.\n");
@@ -137,9 +137,9 @@ int main(void) {
 			
 			if (userChoice == 1) {
 				if (user.gold >= 25) {
-					printf("\n**********\n");
-					printf("You hand the prisoner the gold.\nHe points to a loose stone in the wall.\nIt reveals a tunnel that leads to the inside of the castle.\n");
-					printf("**********\n\n");
+					AsteriskWall(1, 10, 1);
+					printf("You hand the prisoner the gold.\nHe points to a loose stone in the wall.\nIt reveals a tunnel that leads to the inside of the castle.");
+					AsteriskWall(1, 10, 2);
 					user.gold -= 25;
 					loopControl = 1;
 					userArea = 1;
@@ -149,9 +149,9 @@ int main(void) {
 					printf("Not enough gold.\n");
 				} 
 			} else if (userChoice == 2) {
-				printf("\n**********\n");
-				printf("You find an old rusty nail in the cracks of the floor.\nYou use it to try and pick the lock.\n");
-				printf("**********\n\n");
+				AsteriskWall(1, 10, 1);
+				printf("You find an old rusty nail in the cracks of the floor.\nYou use it to try and pick the lock.");
+				AsteriskWall(1, 10, 2);
 				printf("Pick a number from 1 to 3, the correct number will unlock the lock.\n");						
 				lockNum = 0;
 				randomNum = (rand() % 3) + 1;
@@ -162,11 +162,11 @@ int main(void) {
 						printf("Try again.\n");
 					}
 				} 
-				printf("\n**********\n");
+				AsteriskWall(1, 10, 1);
 				printf("You hear a click as the lock opens.\nYou push open the door and run down a hall, up some stairs, and out a door into the halls of the castle.\n");
 				printf("You peak through a window and notice a wagon getting ready to leave.\nKnowing the guards will notice you've escaped, you figure this is your only way out of the castle.\n");
-				printf("You decide to try and sneak into the back of the wagon.\nAs you sneak into the wagon. You catch the attention of a guard nearby.\n");
-				printf("**********\n\n");
+				printf("You decide to try and sneak into the back of the wagon.\nAs you sneak into the wagon. You catch the attention of a guard nearby.");
+				AsteriskWall(1, 10, 2);
 				printf("Guard: \"Hey! what are you doing in there?!\"\n");
 				
 				printf("1) Tell him you are from the nearby village that was transporting ale to the castle and you are getting the wagon ready to go back home\n");
@@ -176,21 +176,21 @@ int main(void) {
 					printf("> ");
 					scanf("%d", &userInput);
 					if (userInput == 1) {
-						printf("\n**********\n");
+						AsteriskWall(1, 10, 1);
 						printf("The guard takes a couple seconds to respond. Putting you on edge. Maybe he already knows about you escaping.\n");
 						printf("He smiles and laughs. \nGuard: \"That ale sure is good! Just make sure you bring double the amount next time.\" \nGuard: \"Us guards sure love to get into the ale after work. Well, carry on.\"\n");
-						printf("You nod as he turns and walks away. You decide to grab a blanket out of the back and take the wagon for yourself. \nYou hop on and head to the gate. The guards open the gate and you carry on through to freedom. Never looking back.\n");
-						printf("**********\n\n");
+						printf("You nod as he turns and walks away. You decide to grab a blanket out of the back and take the wagon for yourself. \nYou hop on and head to the gate. The guards open the gate and you carry on through to freedom. Never looking back.");
+						AsteriskWall(1, 10, 2);
 						printf("Game Over.\n");
 						gameOver = true;
 						loopControl = 1;							
 					} else if (userInput == 2) {
-						printf("\n**********\n");
+						AsteriskWall(1, 10, 1);
 						printf("The guard doesn't seem to believe your story. He asked you to step out of the wagon.\nGuard: \"Why don't we go see the king?\"\n");
 						printf("As you and the guard are walking back into the halls of the castle, multiple guards rush by. \nYou recognize one of them as the one that brought you to the prison.\n");
 						printf("You both lock eyes and he recognizes you.\n2nd Guard: \"Hey! that's the escaped prisoner!\"\n");
-						printf("You are brought back to a more secure prison cell where you will be sentenced to a life of manual labor.\n");
-						printf("**********\n\n");
+						printf("You are brought back to a more secure prison cell where you will be sentenced to a life of manual labor.");
+						AsteriskWall(1, 10, 2);
 						printf("Game Over.\n");
 						gameOver = true;
 						loopControl = 1;							
@@ -202,9 +202,9 @@ int main(void) {
 				loopControl = 1;
 				
 			} else if (userChoice == 3) {
-				printf("\n**********\n");
-				printf("Days have gone by as you sit in your cell.\nGuards finally come and get you.\nYou've been banished from the castle forever.\n");
-				printf("**********\n\n");
+				AsteriskWall(1, 10, 1);
+				printf("Days have gone by as you sit in your cell.\nGuards finally come and get you.\nYou've been banished from the castle forever.");
+				AsteriskWall(1, 10, 2);
 				printf("Game Over.\n");
 				gameOver = true;
 				loopControl = 1;
@@ -246,8 +246,8 @@ int main(void) {
 			} else if (tempVal == 2) {
 				AsteriskWall(1, 10, 1);
 				printf("You search the bushes near the castle and discover a hole in the castle wall.");
-				AsteriskWall(1, 10, 1);
-				printf("\nDo you want to enter the castle?\n");
+				AsteriskWall(1, 10, 2);
+				printf("Do you want to enter the castle?\n");
 				printf("1) Yes.\n");
 				printf("2) No.\n");
 				tempVal = GetUserInput(1, 2);
@@ -398,6 +398,7 @@ UserInfo UserIntro() {
 	return info;
 
 }
+
 
 
 
