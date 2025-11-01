@@ -337,8 +337,10 @@ int GetUserInput(int optionsMin, int optionsLimit) { // Function for getting use
 		scanf("%d", &userIn);
 		if (userIn < optionsMin || userIn > optionsLimit) {
 			printf("Invalid input\n");
+		} else {
+			break;
 		}
-	} while (userIn < optionsMin || userIn > optionsLimit);
+	} while (1);
 	
 	return userIn;
 }
@@ -396,6 +398,7 @@ UserInfo UserIntro() {
 	return info;
 
 }
+
 
 
 
