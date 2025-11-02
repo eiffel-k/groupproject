@@ -61,7 +61,6 @@ int main(void) {
 		}else if (user.area == 1) { 
 
 			user = InsideGate(user);
-			break;
 
 		}else if (user.area == 2) {
 
@@ -497,5 +496,7 @@ UserInfo InsideGate(UserInfo user) { //FIXME area needs to be created
 	printf("Entering the castle...\n");
 	// CODE GOES HERE	
 	user.gameOver = true;
-
+    return user;
+	
 }
+
