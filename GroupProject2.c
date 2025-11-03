@@ -182,10 +182,10 @@ UserInfo MainGate(UserInfo user) {
 	
 	do { // Handles invalid input if gold is < 50
 		user.choice = GetUserInputNum(1, 3);
-		if (user.gold > 50 || user.choice != 1) {
-			break;
+		if (user.gold < 50 && user.choice == 1) {
+			printf("Not enough gold.\n");
 		} else {
-			printf("Not enough gold\n");
+			break;
 		}
 		
 	} while (1);
@@ -248,15 +248,15 @@ UserInfo PrisonArea(UserInfo user) {
 
 	do { // Handles invalid input if gold is < 25
 		user.choice = GetUserInputNum(1, 3);
-		if (user.gold > 25 || user.choice != 1) {
-			break;
+		if (user.gold < 25 && user.choice == 1) {
+			printf("Not enough gold.\n");
 		} else {
-			printf("Not enough gold\n");
+			break;
 		}
 		
 	} while (1);
 	
-	if (user.choice == 1) {
+	if (user.choice == 1) { //go to inside gate
 
 		AsteriskWall(1, 10, 1);
 		printf("You hand the prisoner the gold.\nHe points to a loose stone in the wall.\nIt reveals a tunnel that leads to the inside of the castle.");
@@ -264,7 +264,7 @@ UserInfo PrisonArea(UserInfo user) {
 		user.gold -= 25;
 		loopControl = 1;
 		user.area = 1;
-		//go to inside gate
+		
 
 	} else if (user.choice == 2) {
 
@@ -486,10 +486,11 @@ UserInfo OutsideGate(UserInfo user) {
 				return user;
 
 			}
+			
 		}
+		
 	}
 			
-
 }
 
 
@@ -501,5 +502,6 @@ UserInfo InsideGate(UserInfo user) { //FIXME area needs to be created
     return user;
 	
 }
+
 
 
