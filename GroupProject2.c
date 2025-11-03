@@ -58,15 +58,15 @@ int main(void) {
 
 			user = MainGate(user);
 
-		}else if (user.area == 1) { 
+		} else if (user.area == 1) { 
 
 			user = InsideGate(user);
 
-		}else if (user.area == 2) {
+		} else if (user.area == 2) {
 
 			user = PrisonArea(user);
 
-		}else if (user.area == 3) {
+		} else if (user.area == 3) {
 
 			user = OutsideGate(user);
 			
@@ -130,7 +130,7 @@ UserInfo UserIntro() {
 	temp.gameOver = false;
 	temp.numChoices = 0;
 
-	int userChoice = 0;
+	int userConfirm = 0;
 
 	// Set the scene for the story
 	AsteriskWall(0, 10, 1);
@@ -142,7 +142,7 @@ UserInfo UserIntro() {
 
 	printf("Gate Guard: \"Stop right there!\"\n"); 
 				
-	while ( userChoice != 1 ) {
+	while ( userConfirm != 1 ) {
 
 		printf("Gate Guard: \"Please state your name and occupation.\"\n\n");
 	
@@ -159,7 +159,7 @@ UserInfo UserIntro() {
 		printf("2) No.\n");
 		
 
-		userChoice = GetUserInputNum(1, 2);
+		userConfirm = GetUserInputNum(1, 2);
 
 		printf("\n");
 
@@ -180,53 +180,53 @@ UserInfo MainGate(UserInfo user) {
 	printf("2) Fight past the guard.\n");
 	printf("3) Find another way in.\n");
 	
-	while ( user.choice != 1 && user.choice != 2 && user.choice != 3 ) {
-		
+	do { // Handles invalid input if gold is < 50
 		user.choice = GetUserInputNum(1, 3);
-	
-		if (user.gold < 50 && user.choice == 1) {
-
+		if (user.gold > 50 || user.choice != 1) {
+			break;
+		} else {
 			printf("Not enough gold\n");
-			user.choice = 0;
+		}
+		
+	} while (1);
 
-		} else if (user.gold >= 50 && user.choice == 1) { //go to inside gate
 
-			printf("\nGate Guard: \"Welcome to the castle %s!\"\n", user.name);
-			user.gold -= 50;
-			user.area = 1;
-			return user;
+	if (user.choice == 1) { //go to inside gate
 
-		} else if (user.choice == 2) { // go to prison area
+		printf("\nGate Guard: \"Welcome to the castle %s!\"\n", user.name);
+		user.gold -= 50;
+		user.area = 1;
+		return user;
 
-			AsteriskWall(1, 10, 1);
-			printf("You try to fight your way past the guard, but your tired body fails you.\nMore guards rush to the gate, and you are swiftly taken to prison.");
-			AsteriskWall(1, 10, 2);
-			user.area = 2;
-			return user;
+	} else if (user.choice == 2) { // go to prison area
 
-		} else if (user.choice == 3) { // go to outside gate
-			
-			AsteriskWall(1, 10, 1);
-			printf("As you look around you, you see an unkempt thicket.\n");
+		AsteriskWall(1, 10, 1);
+		printf("You try to fight your way past the guard, but your tired body fails you.\nMore guards rush to the gate, and you are swiftly taken to prison.");
+		AsteriskWall(1, 10, 2);
+		user.area = 2;
+		return user;
 
-			if (user.oldManQuest == 2) {
+	} else if (user.choice == 3) { // go to outside gate
+		
+		AsteriskWall(1, 10, 1);
+		printf("As you look around you, you see an unkempt thicket.\n");
 
-				printf("An old man plays happily with his goat, and you can hear the guards letting people in behind you.");
+		if (user.oldManQuest == 2) {
 
-			} else {
-
-				printf("An old man paces worriedly near his pack mule, and you can hear the guards letting people in behind you.");
-
-			}
-
-			AsteriskWall(1, 10, 1);
-			user.area = 3;
-			return user;
+			printf("An old man plays happily with his goat, and you can hear the guards letting people in behind you.");
 
 		} else {
-			printf("INVALID INPUT\n");
+
+			printf("An old man paces worriedly near his pack mule, and you can hear the guards letting people in behind you.");
+
 		}
-	}	
+
+		AsteriskWall(1, 10, 1);
+		user.area = 3;
+		return user;
+		
+	}
+	
 }
 
 UserInfo PrisonArea(UserInfo user) {
@@ -246,23 +246,25 @@ UserInfo PrisonArea(UserInfo user) {
 	printf("2) Try to pick the lock.\n");
 	printf("3) Wait for a guard to see the consequences of your actions.\n");
 
-	user.choice = GetUserInputNum(1, 3);
+	do { // Handles invalid input if gold is < 25
+		user.choice = GetUserInputNum(1, 3);
+		if (user.gold > 25 || user.choice != 1) {
+			break;
+		} else {
+			printf("Not enough gold\n");
+		}
+		
+	} while (1);
 	
 	if (user.choice == 1) {
 
-		if (user.gold >= 25) {
-
-			AsteriskWall(1, 10, 1);
-			printf("You hand the prisoner the gold.\nHe points to a loose stone in the wall.\nIt reveals a tunnel that leads to the inside of the castle.");
-			AsteriskWall(1, 10, 2);
-			user.gold -= 25;
-			loopControl = 1;
-			user.area = 1;
-			//go to inside gate
-
-		} else {
-			printf("Not enough gold.\n");
-		} 
+		AsteriskWall(1, 10, 1);
+		printf("You hand the prisoner the gold.\nHe points to a loose stone in the wall.\nIt reveals a tunnel that leads to the inside of the castle.");
+		AsteriskWall(1, 10, 2);
+		user.gold -= 25;
+		loopControl = 1;
+		user.area = 1;
+		//go to inside gate
 
 	} else if (user.choice == 2) {
 
@@ -499,4 +501,5 @@ UserInfo InsideGate(UserInfo user) { //FIXME area needs to be created
     return user;
 	
 }
+
 
