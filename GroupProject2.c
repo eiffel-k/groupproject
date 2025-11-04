@@ -359,7 +359,9 @@ UserInfo OutsideGate(UserInfo user) {
 
 		printf("3) Speak to the old man.\n");
 
-	} else if (user.oldManQuest == 1 && user.hasGoat == 0) {
+	} 
+	
+	if (user.oldManQuest == 1 && user.hasGoat == 0) {
 
 		printf("4) Search deeper in the woods.\n");
 
@@ -493,6 +495,7 @@ UserInfo InsideGate(UserInfo user) { //FIXME area needs to be created
     return user;
 	
 }
+
 
 
 
