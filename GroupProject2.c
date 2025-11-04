@@ -231,7 +231,6 @@ UserInfo MainGate(UserInfo user) {
 
 UserInfo PrisonArea(UserInfo user) {
 
-	int loopControl = 0; // for prison area loop control 
 	int lockNum = 0; // for prison area lock pick
 	int randomNum = 0; // for prison area lock pick
 
@@ -262,8 +261,8 @@ UserInfo PrisonArea(UserInfo user) {
 		printf("You hand the prisoner the gold.\nHe points to a loose stone in the wall.\nIt reveals a tunnel that leads to the inside of the castle.");
 		AsteriskWall(1, 10, 2);
 		user.gold -= 25;
-		loopControl = 1;
 		user.area = 1;
+		return user;
 		
 
 	} else if (user.choice == 2) {
@@ -295,39 +294,35 @@ UserInfo PrisonArea(UserInfo user) {
 		printf("1) Tell him you are from the nearby village that was transporting ale to the castle and you are getting the wagon ready to go back home\n");
 		printf("2) Tell him the King asked you to check the wagons for any food or goods left.\n");
 		
-		while (loopControl != 1) {
+		
 
-			user.choice = GetUserInputNum(1, 3);
+		user.choice = GetUserInputNum(1, 2);
 
-			if (user.choice == 1) {
+		if (user.choice == 1) {
 
-				AsteriskWall(1, 10, 1);
-				printf("The guard takes a couple seconds to respond. Putting you on edge. Maybe he already knows about you escaping.\n");
-				printf("He smiles and laughs. \nGuard: \"That ale sure is good! Just make sure you bring double the amount next time.\" \nGuard: \"Us guards sure love to get into the ale after work. Well, carry on.\"\n");
-				printf("You nod as he turns and walks away. You decide to grab a blanket out of the back and take the wagon for yourself. \nYou hop on and head to the gate. The guards open the gate and you carry on through to freedom. Never looking back.");
-				AsteriskWall(1, 10, 2);
-				printf("Game Over.\n");
-				user.gameOver = true;
-				loopControl = 1;		
+			AsteriskWall(1, 10, 1);
+			printf("The guard takes a couple seconds to respond. Putting you on edge. Maybe he already knows about you escaping.\n");
+			printf("He smiles and laughs. \nGuard: \"That ale sure is good! Just make sure you bring double the amount next time.\" \nGuard: \"Us guards sure love to get into the ale after work. Well, carry on.\"\n");
+			printf("You nod as he turns and walks away. You decide to grab a blanket out of the back and take the wagon for yourself. \nYou hop on and head to the gate. The guards open the gate and you carry on through to freedom. Never looking back.");
+			AsteriskWall(1, 10, 2);
+			printf("Game Over.\n");
+			user.gameOver = true;
+			return user;
+	
+		} else if (user.choice == 2) {
 
-			} else if (user.choice == 2) {
-
-				AsteriskWall(1, 10, 1);
-				printf("The guard doesn't seem to believe your story. He asked you to step out of the wagon.\nGuard: \"Why don't we go see the king?\"\n");
-				printf("As you and the guard are walking back into the halls of the castle, multiple guards rush by. \nYou recognize one of them as the one that brought you to the prison.\n");
-				printf("You both lock eyes and he recognizes you.\n2nd Guard: \"Hey! that's the escaped prisoner!\"\n");
-				printf("You are brought back to a more secure prison cell where you will be sentenced to a life of manual labor.");
-				AsteriskWall(1, 10, 2);
-				printf("Game Over.\n");
-				user.gameOver = true;
-				loopControl = 1;	
-
-			} else {
-				printf("INVALID INPUT\n");
-			}
-		}
+			AsteriskWall(1, 10, 1);
+			printf("The guard doesn't seem to believe your story. He asked you to step out of the wagon.\nGuard: \"Why don't we go see the king?\"\n");
+			printf("As you and the guard are walking back into the halls of the castle, multiple guards rush by. \nYou recognize one of them as the one that brought you to the prison.\n");
+			printf("You both lock eyes and he recognizes you.\n2nd Guard: \"Hey! that's the escaped prisoner!\"\n");
+			printf("You are brought back to a more secure prison cell where you will be sentenced to a life of manual labor.");
+			AsteriskWall(1, 10, 2);
+			printf("Game Over.\n");
+			user.gameOver = true;	
+			return user;
+			
+		} 
 				
-		loopControl = 1;
 		
 	} else if (user.choice == 3) {
 
@@ -336,13 +331,9 @@ UserInfo PrisonArea(UserInfo user) {
 		AsteriskWall(1, 10, 2);
 		printf("Game Over.\n");
 		user.gameOver = true;
-		loopControl = 1;
+		return user;
 
-	} else {
-		printf("INVALID INPUT\n");
 	} 
-
-	return user;
 	
 }
 
@@ -502,6 +493,7 @@ UserInfo InsideGate(UserInfo user) { //FIXME area needs to be created
     return user;
 	
 }
+
 
 
 
